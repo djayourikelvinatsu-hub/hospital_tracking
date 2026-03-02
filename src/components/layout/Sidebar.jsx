@@ -11,6 +11,7 @@ import {
     LogOut
 } from 'lucide-react';
 import './Sidebar.css';
+import logoImg from '../../assets/logo.png';
 
 const navItems = [
     { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -39,8 +40,7 @@ const Sidebar = ({ isOpen, onClose }) => {
     return (
         <aside className={`sidebar ${isOpen ? 'mobile-open' : ''}`}>
             <div className="sidebar-logo">
-                <Activity className="logo-icon" size={28} />
-                <span className="logo-text">MediTrack Pro</span>
+                <img src={logoImg} alt="MediTrack Pro Logo" className="logo-img" />
             </div>
 
             <nav className="sidebar-nav">
