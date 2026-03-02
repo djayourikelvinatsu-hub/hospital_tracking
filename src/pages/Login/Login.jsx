@@ -31,16 +31,6 @@ const Login = () => {
         }, 600);
     };
 
-    const handleDemoLogin = (role) => {
-        if (role === 'admin') {
-            setUsername('admin');
-            setPassword('admin123');
-        } else if (role === 'doctor') {
-            setUsername('doctor');
-            setPassword('doc123');
-        }
-    };
-
     return (
         <div className="login-container">
             <div className="login-card">
@@ -93,13 +83,7 @@ const Login = () => {
                     </button>
                 </form>
 
-                <div className="demo-credentials">
-                    <p className="text-sm font-medium mb-2 text-center text-secondary">Demo Accounts</p>
-                    <div className="flex justify-center gap-2">
-                        <button onClick={() => handleDemoLogin('admin')} className="btn btn-secondary text-xs">Admin</button>
-                        <button onClick={() => handleDemoLogin('doctor')} className="btn btn-secondary text-xs">Doctor</button>
-                    </div>
-                </div>
+
             </div>
         </div>
     );
