@@ -45,11 +45,9 @@ const Login = () => {
         <div className="login-container">
             <div className="login-card">
                 <div className="login-header">
-                    <div className="login-logo">
-                        <Activity className="text-primary" size={36} />
+                    <div className="login-logo-img-wrapper" style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+                        <img src="/logo.png" alt="MediTrack Pro Logo" style={{ height: '64px', width: 'auto' }} />
                     </div>
-                    <h2>MediTrack Pro</h2>
-                    <p className="text-secondary">Hospital Management System</p>
                 </div>
 
                 {error && (
