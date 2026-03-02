@@ -9,6 +9,7 @@ import {
     FileText,
     ChevronDown
 } from 'lucide-react';
+import { API_BASE_URL } from '../../config';
 import './PatientRecords.css';
 
 const patientJourney = [
@@ -29,7 +30,7 @@ const PatientRecords = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:5001/api/patients')
+        fetch(`${API_BASE_URL}/api/patients`)
             .then(res => res.json())
             .then(data => {
                 setPatients(data);

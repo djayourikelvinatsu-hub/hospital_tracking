@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 import { AlertCircle, Info, AlertTriangle, X } from 'lucide-react';
+import { API_BASE_URL } from '../../config';
 import './ToastContainer.css';
 
 const ToastContainer = () => {
     const [toasts, setToasts] = useState([]);
 
     useEffect(() => {
-        // Connect to the Socket.IO server on backend port 5001
-        const socket = io('http://localhost:5001');
+        // Connect to the Socket.IO server utilizing the config API base URL
+        const socket = io(API_BASE_URL);
 
         socket.on('connect', () => {
             console.log('Connected to real-time alerts server');

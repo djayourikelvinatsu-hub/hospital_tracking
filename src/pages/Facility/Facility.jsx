@@ -5,6 +5,7 @@ import {
     Settings,
     AlertCircle
 } from 'lucide-react';
+import { API_BASE_URL } from '../../config';
 import './Facility.css';
 
 const Facility = () => {
@@ -15,7 +16,7 @@ const Facility = () => {
 
     // Fetch departments on load
     useEffect(() => {
-        fetch('http://localhost:5001/api/departments')
+        fetch(`${API_BASE_URL}/api/departments`)
             .then(res => res.json())
             .then(data => {
                 setDepartments(data);
@@ -31,7 +32,7 @@ const Facility = () => {
     useEffect(() => {
         if (!activeDept) return;
 
-        fetch(`http://localhost:5001/api/beds?dept=${activeDept.id}`)
+        fetch(`${API_BASE_URL}/api/beds?dept=${activeDept.id}`)
             .then(res => res.json())
             .then(data => setBedData(data))
             .catch(err => console.error('Error fetching beds:', err));

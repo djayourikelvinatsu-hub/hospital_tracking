@@ -8,6 +8,7 @@ import {
     Filter,
     CheckCircle2
 } from 'lucide-react';
+import { API_BASE_URL } from '../../config';
 import './GateEntry.css';
 
 const GateEntry = () => {
@@ -16,7 +17,7 @@ const GateEntry = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:5001/api/gate-entries')
+        fetch(`${API_BASE_URL}/api/gate-entries`)
             .then(res => res.json())
             .then(data => {
                 setRecentEntries(data);
