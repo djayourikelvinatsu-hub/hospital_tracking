@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { Activity, Lock, User, AlertCircle } from 'lucide-react';
-import './Login.css';
+import { UserPlus, User, Lock, AlertCircle } from 'lucide-react';
+import './Signup.css';
 
-const Login = () => {
+const Signup = () => {
+    const [name, setName] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    const { login } = useAuth();
+    const { signup } = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -20,7 +21,7 @@ const Login = () => {
 
         // Slight delay for effect
         setTimeout(async () => {
-            const result = await login(username, password);
+            const result = await signup(name, username, password, 'doctor');
             setIsLoading(false);
 
             if (result.success) {
@@ -32,29 +33,44 @@ const Login = () => {
     };
 
     return (
-        <div className="login-container">
-            <div className="login-card">
-                <div className="login-header">
-                    <div className="login-logo-img-wrapper" style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+        <div className="signup-container">
+            <div className="signup-card">
+                <div className="signup-header">
+                    <div className="signup-logo-img-wrapper" style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
                         <img src="/logo.png" alt="MediTrack Pro Logo" style={{ height: '64px', width: 'auto' }} />
                     </div>
+                    <h2>Doctor Registration</h2>
+                    <p className="text-secondary">Create your MediTrack Pro account</p>
                 </div>
 
                 {error && (
-                    <div className="login-error">
+                    <div className="signup-error">
                         <AlertCircle size={16} />
                         {error}
                     </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="login-form">
+                <form onSubmit={handleSubmit} className="signup-form">
+                    <div className="input-group">
+                        <div className="input-icon">
+                            <UserPlus size={18} />
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Full Name (e.g., Dr. Jane Doe)"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
+                    </div>
+
                     <div className="input-group">
                         <div className="input-icon">
                             <User size={18} />
                         </div>
                         <input
                             type="text"
-                            placeholder="Username"
+                            placeholder="Choose Username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             required
@@ -67,7 +83,7 @@ const Login = () => {
                         </div>
                         <input
                             type="password"
-                            placeholder="Password"
+                            placeholder="Create Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
@@ -76,16 +92,16 @@ const Login = () => {
 
                     <button
                         type="submit"
-                        className="btn btn-primary login-btn"
+                        className="btn btn-primary signup-btn"
                         disabled={isLoading}
                     >
-                        {isLoading ? 'Authenticating...' : 'Sign In'}
+                        {isLoading ? 'Creating Account...' : 'Sign Up'}
                     </button>
                 </form>
 
-                <div className="signup-prompt">
+                <div className="login-prompt">
                     <p className="text-sm text-secondary text-center mt-6">
-                        Don't have an account? <Link to="/signup" className="font-medium text-primary hover:underline">Sign up as a Doctor</Link>
+                        Already have an account? <Link to="/login" className="font-medium text-primary hover:underline">Sign In here</Link>
                     </p>
                 </div>
             </div>
@@ -93,4 +109,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Signup;

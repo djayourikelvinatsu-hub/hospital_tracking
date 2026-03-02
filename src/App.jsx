@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import Layout from './components/layout/Layout';
 // Placeholder imports for pages
 import Login from './pages/Login/Login';
+import Signup from './pages/Signup/Signup';
 import Dashboard from './pages/Dashboard/Dashboard';
 import GateEntry from './pages/GateEntry/GateEntry';
 import PatientRecords from './pages/PatientRecords/PatientRecords';
@@ -30,6 +31,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/gate-entry" element={<ProtectedRoute><GateEntry /></ProtectedRoute>} />

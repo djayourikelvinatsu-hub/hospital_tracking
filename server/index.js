@@ -40,6 +40,32 @@ io.on('connection', (socket) => {
 });
 
 // --- AUTH API ---
+app.post('/api/signup', (req, res) => {
+    const { username, password, name, role = 'doctor' } = req.body;
+
+    if (!username || !password || !name) {
+        return res.status(400).json({ error: 'Username, password, and name are required' });
+    }
+
+    const sql = `INSERT INTO users (username, password, name, role) VALUES (?, ?, ?, ?)`;
+    db.run(sql, [username, password, name, role], function (err) {
+        if (err) {
+            if (err.message.includes('UNIQUE constraint failed')) {
+                return res.status(409).json({ error: 'Username already exists' });
+            }
+            return res.status(500).json({ error: err.message });
+        }
+
+        // Return the created user object
+        const newUser = { id: this.lastID, username, name, role };
+        res.status(201).json({
+            message: 'Signup successful',
+            token: `mock-jwt-token-${newUser.id}`,
+            user: newUser
+        });
+    });
+});
+
 app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) {
